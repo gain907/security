@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"> <!-- 한글 인코딩 처리 -->
+    <title>RSA 암호화 실습</title>
+</head>
+<body>
+    <h2>🔐 RSA 암호화/복호화</h2>
+
+    <!-- 암호화/복호화 선택 및 입력 폼 -->
+    <form method="POST">
+        <!-- 드롭다운: encode 또는 decode 선택 -->
+        <select name="convert_select">
+            <option value="encode" {% if method_type == 'encode' %}selected{% endif %}>암호화 (공개키)</option>
+            <option value="decode" {% if method_type == 'decode' %}selected{% endif %}>복호화 (개인키)</option>
+        </select>
+
+        <!-- 입력창 -->
+        <input type="text" name="inputText" value="{{ convert_text }}" size="50" />
+        <input type="submit" value="실행" />
+    </form>
+
+    <!-- 결과 표시 -->
+    <h4>🔎 변환 결과:</h4>
+    <textarea rows="5" cols="70">{{ convert_result }}</textarea>
+</body>
+</html>
