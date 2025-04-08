@@ -1,0 +1,21 @@
+C:\Users\Administrator\PycharmProjects\security\.venv\Scripts\python.exe C:\Users\Administrator\PycharmProjects\security\비대칭키_RSA\rsa.py 
+Traceback (most recent call last):
+  File "C:\Users\Administrator\PycharmProjects\security\비대칭키_RSA\rsa.py", line 1, in <module>
+    from flask import Flask,request,render_template
+  File "C:\Users\Administrator\PycharmProjects\security\.venv\lib\site-packages\flask\__init__.py", line 5, in <module>
+    from . import json as json
+  File "C:\Users\Administrator\PycharmProjects\security\.venv\lib\site-packages\flask\json\__init__.py", line 6, in <module>
+    from ..globals import current_app
+  File "C:\Users\Administrator\PycharmProjects\security\.venv\lib\site-packages\flask\globals.py", line 6, in <module>
+    from werkzeug.local import LocalProxy
+  File "C:\Users\Administrator\PycharmProjects\security\.venv\lib\site-packages\werkzeug\__init__.py", line 5, in <module>
+    from .serving import run_simple as run_simple
+  File "C:\Users\Administrator\PycharmProjects\security\.venv\lib\site-packages\werkzeug\serving.py", line 28, in <module>
+    from http.server import BaseHTTPRequestHandler
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python38\lib\http\server.py", line 93, in <module>
+    import html
+  File "C:\Users\Administrator\PycharmProjects\security\html.py", line 1, in <module>
+    from flask import Flask,request,render_template
+ImportError: cannot import name 'Flask' from partially initialized module 'flask' (most likely due to a circular import) (C:\Users\Administrator\PycharmProjects\security\.venv\lib\site-packages\flask\__init__.py)
+
+Process finished with exit code 1
