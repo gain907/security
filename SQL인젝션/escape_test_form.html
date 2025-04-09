@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Prepared Statement 입력 테스트</title>
+</head>
+<body>
+    <h2> Prepared Statement 입력 테스트</h2>
+    <form method="POST">
+        <input name="input_text" placeholder="예: tom, tom' -- 등 입력" required>
+        <button type="submit">DB에 저장</button>
+    </form>
+
+    {% if msg %}
+        <p><strong>{{ msg }}</strong></p>
+    {% endif %}
+
+    <hr>
+    <h3> 현재 DB에 저장된 데이터:</h3>
+    <ul>
+        {% for row in rows %}
+            <li>{{ row.my_text }}</li>
+        {% else %}
+            <li>(아직 입력된 값이 없습니다)</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
