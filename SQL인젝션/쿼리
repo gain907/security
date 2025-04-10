@@ -1,6 +1,59 @@
-search_sql = "select o.member_id, s.food_name, o.buy_count,o.buy_date," \
+
+from flask import Flask,request,render_template
+import pyodbc
+
+# 데이터베이스  연결 및 커서 반환 함수
+def get_cursor():
+    server = "localhost"
+    database = "mytest"
+    username = "pyuser"
+    password = "Test123%^&"
+
+    # mssql 연결 문자열 구성 및 연결 시도
+    mssql_conn = pyodbc.connect(
+    'DRIVER={ODBC Driver 17 for SQL Server};'
+    'SERVER=' + server + ';'
+    'DATABASE' + database +';'
+    'PORT=1433;' # sql server가 연결을 수신하는 포트 번호                          
+    'UID=' + username + ';'
+    'PWD=' + password + ';'
+    'TrustServerCertificate=yes;'
+    )
+
+    # 커서 생성 및 반환
+    cursor = mssql_conn.cursor()
+    return cursor
+
+# DB연결 커서 생성
+cursor = get_cursor()
+
+app = Flask(__name__)
+
+@app.route("/", methods=["GET","POST"])
+def item_search():
+    search_text = "" # 검색어 초기화
+
+    if request.method == "POST":
+        search_text = request.form["searchText"]
+
+    #
+    search_sql = "select o.member_id, s.food_name, o.buy_count,o.buy_date," \
                  "s.price,(s.price * o.buy_count) as total_price " \
-                 "from order_record o (nolock)" \
-                 "join supermarket s (nolock)" \
+                 "from order_record o (nolock) " \
+                 "join supermarket s (nolock) " \
                  "on s.food_no = o.food_no " + \
                  "where o.member_id='" + search_text + "'order by o.buy_count desc"
+
+    # sql 실행 및 결과 가져오기
+    cursor.execute(search_sql)
+
+    result_row = cursor.fetchall()
+
+    return render_template("sql_injection.html",
+                           rows = result_row,
+                           search_text =search_text,
+                           sql_query = search_sql
+                           )
+
+
+
