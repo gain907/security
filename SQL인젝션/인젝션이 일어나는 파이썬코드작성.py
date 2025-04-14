@@ -6,8 +6,8 @@ def get_cursor():
     # DB 연결 정보 설정
     server = "localhost"
     database = "mytest"
-    username = "pyuser"
-    password = "Test1234%^&"
+    username = ""
+    password = ""
 
     # MSSQL 연결 문자열 구성 및 연결 시도
     mssql_conn = pyodbc.connect(
