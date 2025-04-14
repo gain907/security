@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import pyodbc
 
-# ✅ 데이터베이스 연결 및 커서 반환 함수
+# 데이터베이스 연결 및 커서 반환 함수
 def get_cursor():
     # DB 연결 정보 설정
     server = "localhost"
@@ -38,7 +38,7 @@ JOIN supermarket s (NOLOCK) ON s.food_no = o.food_no
 WHERE o.member_id = 'tom' ORDER BY o.buy_count DESC;
 
 """
-# ✅ "/item_search" 경로에 대한 라우팅 처리
+# "/item_search" 경로에 대한 라우팅 처리
 @app.route("/item_search", methods=["GET", "POST"])
 def item_search():
     search_text = ""  # 검색어 초기화
@@ -47,7 +47,7 @@ def item_search():
     if request.method == "POST":
         search_text = request.form["searchText"]
 
-    # 🔥 [보안주의] 사용자가 입력한 값을 직접 쿼리에 넣는 방식 → SQL 인젝션 취약!
+    #  사용자가 입력한 값을 직접 쿼리에 넣는 방식 → SQL 인젝션 취약!
     search_sql = "select o.member_id, s.food_name, o.buy_count, o.buy_date, " \
                 "s.price, (s.price * o.buy_count) " \
                 "total_price from order_record o(nolock) " + \
@@ -69,7 +69,7 @@ def item_search():
         sql_query=search_sql  # 쿼리 자체도 보여주기 (디버깅 or 교육용)
     )
 
-# ✅ Flask 웹서버 실행 설정
+# Flask 웹서버 실행 설정
 # - 127.0.0.1 (localhost) 주소
 # - 포트 5000 사용
 # - debug=True: 에러 상세 표시 및 자동 재시작 기능 활성화
