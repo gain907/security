@@ -12,8 +12,7 @@
         </style>
         <script src="http://code.jquery.com/jquery-3.6.0.min.js" ></script>
         <script type="text/javascript">
-            $(document).ready(function(){
-            // 안전하게 JSON 문자열로 처리
+            $(document).ready(function(){        
             var reflected_xss_string = {{ reflected_xss_string|tojson }};
             $("#inputText").val(reflected_xss_string);
 
