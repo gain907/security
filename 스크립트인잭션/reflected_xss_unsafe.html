@@ -1,57 +1,41 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2487.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <head>
+        <style>
+            table, td, th {
+                border: 1px solid black;
+                text-align: center;
+            }
+
+            table {
+                border-collapse: collapse;
+            }
+        </style>
+        <script src="http://code.jquery.com/jquery-3.6.0.min.js" ></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+            // 안전하게 JSON 문자열로 처리
+            var reflected_xss_string = {{ reflected_xss_string|tojson }};
+            $("#inputText").val(reflected_xss_string);
+
+            $("#reflected_xss_string").html(reflected_xss_string);
+            });
+        </script>
+        <title>XSS</title>
 </head>
-<body>
-<p class="p1">&lt;html&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>table, td, th {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>border: 1px solid black;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>table {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>border-collapse: collapse;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;script src="http://code.jquery.com/jquery-3.6.0.min.js" &gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;script type="text/javascript"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>$(document).ready(function(){</p>
-<p class="p1"><span class="Apple-converted-space">            </span>// 안전하게 JSON 문자열로 처리</p>
-<p class="p1"><span class="Apple-converted-space">            </span>var reflected_xss_string = {{ reflected_xss_string|tojson }};</p>
-<p class="p1"><span class="Apple-converted-space">            </span>$("#inputText").val(reflected_xss_string);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>$("#reflected_xss_string").html(reflected_xss_string);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>});</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;title&gt;XSS&lt;/title&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;form id = "xssText" action = "xss" method = "get"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;fieldset&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;legend&gt;XSS 실습&lt;/legend&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>XSS 스크립트:</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;input type="text" id="inputText" name="inputText"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;input type="submit" name="button"<span class="Apple-converted-space">  </span>value="실행"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/fieldset&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/form&gt;</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h4&gt;스크립트 표시&lt;/h4&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;hr&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>[reflected_xss]</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id ="reflected_xss_string"&gt; &lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
-</body>
+    <body>
+        <form id = "xssText" action = "xss" method = "get">
+            <fieldset>
+                <legend>XSS 실습</legend>
+                XSS 스크립트:
+                <input type="text" id="inputText" name="inputText">
+                <input type="submit" name="button"  value="실행">
+            </fieldset>
+        </form>
+
+
+        <h4>스크립트 표시</h4>
+        <hr>
+        [reflected_xss]
+        <div id ="reflected_xss_string"> </div>
+    </body>
 </html>
