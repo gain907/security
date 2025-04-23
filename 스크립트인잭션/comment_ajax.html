@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>댓글 AJAX 예제</title>
+    <!-- jQuery CDN: AJAX 요청을 위해 사용 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h2>댓글 달기</h2>
+
+    <!-- 댓글 입력창 -->
+    <textarea id="comment" rows="4" cols="50" placeholder="댓글을 입력하세요"></textarea><br>
+    <!-- 댓글 등록 버튼 -->
+    <button onclick="submitComment()">등록</button>
+
+    <h3>저장된 댓글</h3>
+    <!-- 댓글 목록 출력 영역 -->
+    <div id="commentList"></div>
+
+    <script>
+        // 댓글 등록 함수 (AJAX POST)
+        function submitComment() {
+            $.post("/add_comment", { content: $("#comment").val() }, function(response) {
+                $("#comment").val("");      // 입력창 비우기
+                loadComments();            // 댓글 목록 새로고침
+            });
+        }
+
+        // 댓글 목록 불러오기 함수 (AJAX GET)
+        function loadComments() {
+            $.get("/get_comments", function(data) {
+                let html = "";
+                data.forEach(function(comment) {
+                    html += "<p>" + escapeHtml(comment) + "</p>";  // XSS 방지 적용
+                });
+                $("#commentList").html(html);  // 화면에 삽입
+            });
+        }
+
+        // XSS 방지용 HTML 이스케이프 함수
+        function escapeHtml(str) {
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // 페이지 로드 시 댓글 목록 불러오기
+        $(document).ready(function() {
+            loadComments();  // 페이지 처음 로딩될 때, 기존 댓글들을 서버에서 가져옴
+        });
+    </script>
+</body>
+</html>
