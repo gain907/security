@@ -1,0 +1,9 @@
+[Fiddler 사용법 요약]
+
+1. Fiddler 실행
+2. 브라우저에서 요청 발생 (Flask 서버로)
+3. 요청 클릭 → Inspectors → Raw 또는 Headers 탭 확인
+4. Composer 탭에서 요청 복사
+5. Cookie 헤더 수정:
+   Cookie: user_name=해커홍길동
+6. Execute 클릭 → 서버에 조작된 쿠키 전송
