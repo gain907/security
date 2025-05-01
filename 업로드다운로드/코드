@@ -1,2 +1,17 @@
     # response.headers["Content-type"] = "text/csv"
     response.headers["Content-Type"] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+
+
+
+POST /upload_process HTTP/1.1
+Host: 127.0.0.1:5000
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryrCTJCqIsLQsL6Q4T
+
+
+------WebKitFormBoundaryrCTJCqIsLQsL6Q4T
+Content-Disposition: form-data; name="uploaded_file"; filename="html.php"
+Content-Type:image/jpeg
+
+넣고싶은 코드 넣는곳
+
+------WebKitFormBoundaryrCTJCqIsLQsL6Q4T--
